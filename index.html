@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    :root {
+      --line: #e5e7eb;
+      --paper: #FFF7EB;
+    }
+
+    .pwa-vendor {
+      background: #FFF7EB;
+    }
+
+    .wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 12px 16px 96px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 6px 0 12px;
+    }
+
+    .topbar a {
+      text-decoration: none;
+      color: #111827;
+      font-weight: 600;
+    }
+
+    .mb {
+      margin-bottom: 12px;
+    }
+
+    .label {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .val {
+      color: #111827;
+    }
+
+    .muted {
+      color: #6b7280;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .col {
+      flex: 1 1 220px;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn {
+      background: #FFF7EB;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, .1);
+      color: #0F3D2F;
+      font: 500 15px/1.45 Quicksand, system-ui, sans-serif;
+    }
+
+    .btn-primary {
+      background: #111827;
+      color: #fff;
+      border: 0;
+    }
+
+    .btn[disabled] {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn--round {
+      border-radius: 100px;
+    }
+
+    .glass-button-send-code-smb {
+      width: 176px;
+      background: #FFF7EB;
+      color: #0F3D2F;
+    }
+
+    .glass-button-send-code-smb:hover {
+      color: #F5A623;
+      background: #FFF7EB;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      transition: all 0.2s ease-in-out;
+      color: #F5A623 !important;
+    }
+
+    /* --- CARD --- */
+    .card {
+      font-family: Quicksand, system-ui, sans-serif;
+      color: #0E3925;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 20px 40px;
+      max-width: 380px;
+
+      background-color: #FCF4D8;
+      line-height: 1.1;
+      border: 0;
+      box-sizing: border-box;
+
+      margin-block: 0 15px;
+      margin-inline: auto;
+    }
+
+    .card__image-box {
+      position: relative;
+    }
+
+    .card__img {
+      width: 100%;
+      display: block;
+      max-height: 200px;
+      aspect-ratio: 1.5;
+      object-fit: cover;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      background: #f3f4f6;
+    }
+
+    .card__rating {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: #fff8e1;
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+    }
+
+    .card__star {
+      color: #F1990A;
+      font-size: 14px;
+    }
+
+    .card__badge {
+      position: absolute;
+      max-width: 80px;
+      top: 10px;
+      right: 10px;
+      background-color: #B4381C;
+      color: #ECDACF;
+      text-align: center;
+      line-height: 1.2;
+      border-radius: 6px;
+      padding: 4px 6px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .card__content {
+      padding: 16px;
+      background-color: #FCF3D7;
+      box-shadow: 0px 2px 60px -20px #0000001a;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    .card__title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-block: 0 10px;
+    }
+
+    .card__subtitle {
+      margin-block: 0 8px;
+    }
+
+    .card__distance {
+      margin: 0;
+    }
+
+    .card__subtitle,
+    .card__distance {
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    .card__price-box {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0;
+    }
+
+    .card__old-price {
+      text-decoration: line-through;
+      color: #2D4A3D;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .card__new-price {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .card__button {
+      margin-top: 12px;
+      width: 100%;
+      background-color: #F1990A;
+      border: none;
+      border-radius: 15px;
+      padding-block: 12px 10px;
+      padding-inline: 0;
+      color: #1d2b2a;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .card__button:hover {
+      background-color: #fdae2c;
+    }
+
+    /* --- PROMO --- */
+    .promo {
+      position: relative;
+
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 380px;
+      max-height: fit-content;
+      font-family: Quicksand, system-ui, sans-serif;
+      line-height: 1.2;
+      background-image: url('promo-bg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      border-radius: 5px;
+      text-align: center;
+
+      padding: 20px 15px;
+      margin-block: 0 15px;
+      margin-inline: auto;
+    }
+
+    .promo__title {
+      color: #e88a1a;
+      font-weight: 800;
+      font-size: 36px;
+      margin-block: 0 10px;
+      text-wrap: balance;
+      line-height: 1.1;
+    }
+
+    .promo__subtitle {
+      font-size: 16px;
+      color: #F2EDD8;
+      margin-block: 0 180px;
+    }
+
+
+    .promo__badge {
+      position: absolute;
+      top: 180px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    .promo__badge--left {
+      left: 15px;
+      max-width: 80px;
+      background-color: #B4381C;
+      color: #ECDACF;
+      text-align: center;
+      line-height: 1.2;
+      border-radius: 6px;
+      padding: 4px 6px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .promo__badge--right {
+      right: 15px;
+      background-color: #EF9F17;
+      color: #1D3F21;
+      padding: 6px 8px;
+      border-radius: 12px;
+    }
+
+    /* --- MEAL CARD --- */
+    .meal-card {
+      width: 100%;
+      background-color: #FBE7BF;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      color: #1D3F21;
+      margin: 0 auto;
+    }
+
+    .meal-card__content {
+      padding: 14px;
+      text-align: left;
+    }
+
+    .meal-card__title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+      color: #2c2c2c;
+    }
+
+    .meal-card__subtitle {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 4px 0;
+    }
+
+    .meal-card__like {
+      width: 20px;
+      height: 20px;
+      background: url('heart-outline.svg') center/contain no-repeat;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    .meal-card__like.active {
+      background-image: url('heart-filled.svg');
+    }
+
+    .meal-card__distance {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .meal-card__price-box {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .meal-card__price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #e88a1a;
+    }
+
+    .meal-card__button {
+      margin-top: 12px;
+      width: 100%;
+      background-color: #EC9E18;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 0;
+      color: #1d2b2a;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .meal-card__button:hover {
+      background-color: #e09224;
+    }
+
+    .meal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      transition: 0.25s ease;
+    }
+  </style>
+
+  <div class="wrap">
+    <div class="topbar">
+      <a class="back-btn" href="{{ $fallback }}" onclick="return safeBack(this);">
+        &larr; Back
+      </a>
+    </div>
+
+    <article class="card mb">
+      <div class="card__image-box">
+        <img class="card__img" src="img-1.png" alt="Fried chicken with fries">
+
+        <div class="card__rating">
+          <span class="card__star">★</span>
+          <span class="card__score">4.5</span>
+        </div>
+        <div class="card__badge">Only 3 Left Today</div>
+      </div>
+      <div class="card__content">
+        <h3 class="card__title">Cluck’N’More</h3>
+        <p class="card__subtitle">Pick up today 5:00 PM - 6:00 PM</p>
+        <p class="card__distance">4.2 mi</p>
+        <div class="card__price-box">
+          <span class="card__old-price">$12.50</span>
+          <span class="card__new-price">$7.99</span>
+        </div>
+        <button class="card__button">RESCUE MEAL</button>
+      </div>
+
+      <!-- 
+      <div class="mb">
+        <div class="label">Name</div>
+        <div class="val">{{ $name }}</div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="label">Description</div>
+          <div class="val">{{ $desc }}</div>
+        </div>
+        <div class="col">
+          <div class="label">Points of Sale</div>
+          <div class="val">{{ $pos }}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="label">Ingredients</div>
+          <div class="val">{{ $ing }}</div>
+        </div>
+        <div class="col">
+          <div class="label">Nutrition Info</div>
+          <div class="val">{{ $nut }}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="label">Category</div>
+          <div class="val">{{ $catName }}</div>
+        </div>
+        <div class="col">
+          <div class="label">Base Price</div>
+          <div class="val">${{ number_format((float)$product->price, 2) }}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="label">Quantity</div>
+          <div class="val">
+            @if($qtyUnlimited)
+            Unlimited
+            @else
+            {{ $product->stock }}
+            @endif
+          </div>
+        </div>
+        <div class="col">
+          <div class="label">Set a schedule</div>
+          <div class="val">{{ $product->schedule_enabled ? 'On' : 'Off' }}</div>
+        </div>
+      </div>
+       -->
+      <!-- 
+      <div class="actions">
+        {{-- <a class="btn btn--round btn--md glass-button-send-code-smb"
+          href="{{ route('vendor.products.reuse', $product) }}">Reuse</a> --}}
+
+        {{-- Button Draft Edit --}}
+        @if(!$isPublished)
+        <a class="btn btn--round btn--md glass-button-send-code-smb"
+          href="{{ route('vendor.products.edit', $product) }}">
+          Edit Product
+        </a>
+        @endif
+
+        @if(!$isPublished)
+        <form action="{{ route('vendor.products.publish', $product) }}" method="post" style="display:inline;">
+          @csrf
+          <button type="submit" class="btn btn--round btn--md glass-button-send-code-smb">Publish</button>
+        </form>
+        @else
+        <form action="{{ route('vendor.products.draft', $product) }}" method="post" style="display:inline;">
+          @csrf
+          <button type="submit" class="btn btn--round btn--md glass-button-send-code-smb">Move to Draft</button>
+        </form>
+        @endif
+      </div>
+       -->
+    </article>
+
+    <article class="promo mb">
+      <h2 class="promo__title">SAVE LOCAL MEALS FOR LESS</h2>
+      <p class="promo__subtitle">Feel good about what you eat.</p>
+      <div class="promo__badge promo__badge--left">Only 3 Left Today</div>
+      <div class="promo__badge promo__badge--right">★ Popular</div>
+
+      <div class="meal-card">
+        <div class="meal-card__content">
+          <h3 class="meal-card__title">Roast Chicken Meal</h3>
+          <p class="meal-card__subtitle">Pick up today 9:20 PM - 9:50 PM • 5.6 mi
+          </p>
+          <div class="meal-card__price-box">
+            <p class="meal-card__distance">6.5 mi</p>
+            <div class="meal-card__price-box">
+              <span class="meal-card__price">$5.99</span>
+            </div>
+          </div>
+
+          <button class="meal-card__button">RESCUE MEAL</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</body>
+
+</html>

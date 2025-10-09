@@ -1,0 +1,302 @@
+@extends('pwa.layouts.app')
+
+@section('title','Preview Product')
+@section('body_class','pwa-vendor')
+
+@section('content')
+@php
+$isPublished = !empty($product->published_at);
+$qtyUnlimited = (bool)($product->is_stock_unlimited ?? false);
+@endphp
+<style>
+  :root {
+    --line: #e5e7eb;
+    --paper: #FFF7EB;
+  }
+
+  .pwa-vendor {
+    background: #FFF7EB;
+  }
+
+  .wrap {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 12px 16px 96px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0 12px;
+  }
+
+  .topbar a {
+    text-decoration: none;
+    color: #111827;
+    font-weight: 600;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 12px;
+  }
+
+  .mb {
+    margin-bottom: 12px;
+  }
+
+  .img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #f3f4f6;
+  }
+
+  .label {
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #111827;
+  }
+
+  .val {
+    color: #111827;
+  }
+
+  .muted {
+    color: #6b7280;
+  }
+
+  .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .col {
+    flex: 1 1 220px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .btn {
+    background: #FFF7EB;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, .1);
+    color: #0F3D2F;
+    font: 500 15px/1.45 Quicksand, system-ui, sans-serif;
+  }
+
+  .btn-primary {
+    background: #111827;
+    color: #fff;
+    border: 0;
+  }
+
+  .btn[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hr {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 10px 0;
+  }
+
+  .btn--round {
+    border-radius: 100px;
+  }
+
+  .glass-button-send-code-smb {
+    width: 176px;
+    background: #FFF7EB;
+    color: #0F3D2F;
+  }
+
+  .glass-button-send-code-smb:hover {
+    color: #F5A623;
+    background: #FFF7EB;
+    text-decoration: none;
+  }
+
+  .back-btn:hover {
+    color: #F5A623 !important;
+  }
+</style>
+
+@php
+use Illuminate\Support\Facades\Route as R;
+
+$dashName = R::has('vendor.shop.dashboard') ? 'vendor.shop.dashboard'
+: (R::has('shop.dashboard') ? 'shop.dashboard' : null);
+
+$fallback = $dashName ? route($dashName) : url('/'); //
+@endphp
+
+<div class="wrap">
+  <div class="topbar">
+    <a class="back-btn" href="{{ $fallback }}" onclick="return safeBack(this);">
+      &larr; Back
+    </a>
+  </div>
+
+  <div class="card mb">
+    @php
+    $imageUrl = trim((string)($product->image_url ?? ''));
+    $name = trim((string)($product->name ?? ''));
+    $desc = trim((string)($product->description ?? ''));
+    $pos = trim((string)($product->points_of_sale ?? ''));
+    $ing = trim((string)($product->ingredients ?? ''));
+    $nut = trim((string)($product->nutrition ?? ''));
+    $catName = trim((string)(optional($product->category)->name ?? ''));
+    $priceSet = !is_null($product->price);
+    $hasStock = $qtyUnlimited || !is_null($product->stock);
+    $hasScheduleField = !is_null($product->schedule_enabled);
+    @endphp
+
+    @if($imageUrl !== '')
+    <img class="img" src="{{ $imageUrl }}" alt="">
+    <div class="hr"></div>
+    @endif
+
+    @if($name !== '')
+    <div class="mb">
+      <div class="label">Name</div>
+      <div class="val">{{ $name }}</div>
+    </div>
+    @endif
+
+    @if($desc !== '' || $pos !== '')
+    <div class="row">
+      @if($desc !== '')
+      <div class="col">
+        <div class="label">Description</div>
+        <div class="val">{{ $desc }}</div>
+      </div>
+      @endif
+      @if($pos !== '')
+      <div class="col">
+        <div class="label">Points of Sale</div>
+        <div class="val">{{ $pos }}</div>
+      </div>
+      @endif
+    </div>
+    @endif
+
+    @if($ing !== '' || $nut !== '')
+    <div class="row">
+      @if($ing !== '')
+      <div class="col">
+        <div class="label">Ingredients</div>
+        <div class="val">{{ $ing }}</div>
+      </div>
+      @endif
+      @if($nut !== '')
+      <div class="col">
+        <div class="label">Nutrition Info</div>
+        <div class="val">{{ $nut }}</div>
+      </div>
+      @endif
+    </div>
+    @endif
+
+    @if($catName !== '' || $priceSet)
+    <div class="row">
+      @if($catName !== '')
+      <div class="col">
+        <div class="label">Category</div>
+        <div class="val">{{ $catName }}</div>
+      </div>
+      @endif
+      @if($priceSet)
+      <div class="col">
+        <div class="label">Base Price</div>
+        <div class="val">${{ number_format((float)$product->price, 2) }}</div>
+      </div>
+      @endif
+    </div>
+    @endif
+
+    @if($hasStock || $hasScheduleField)
+    <div class="row">
+      @if($hasStock)
+      <div class="col">
+        <div class="label">Quantity</div>
+        <div class="val">
+          @if($qtyUnlimited)
+          Unlimited
+          @else
+          {{ $product->stock }}
+          @endif
+        </div>
+      </div>
+      @endif
+      @if($hasScheduleField)
+      <div class="col">
+        <div class="label">Set a schedule</div>
+        <div class="val">{{ $product->schedule_enabled ? 'On' : 'Off' }}</div>
+      </div>
+      @endif
+    </div>
+    @endif
+
+    <div class="hr"></div>
+
+    <div class="actions">
+      {{-- <a class="btn btn--round btn--md glass-button-send-code-smb"
+        href="{{ route('vendor.products.reuse', $product) }}">Reuse</a> --}}
+
+      {{-- Button Draft Edit --}}
+      @if(!$isPublished)
+      <a class="btn btn--round btn--md glass-button-send-code-smb" href="{{ route('vendor.products.edit', $product) }}">
+        Edit Product
+      </a>
+      @endif
+
+      @if(!$isPublished)
+      <form action="{{ route('vendor.products.publish', $product) }}" method="post" style="display:inline;">
+        @csrf
+        <button type="submit" class="btn btn--round btn--md glass-button-send-code-smb">Publish</button>
+      </form>
+      @else
+      <form action="{{ route('vendor.products.draft', $product) }}" method="post" style="display:inline;">
+        @csrf
+        <button type="submit" class="btn btn--round btn--md glass-button-send-code-smb">Move to Draft</button>
+      </form>
+      @endif
+    </div>
+  </div>
+</div>
+@push('scripts')
+<script>
+  function safeBack(a) {
+    if (history.length <= 1) return true;
+    const ref = document.referrer || '';
+    try {
+      const u = new URL(ref, location.origin);
+      if (u.origin === location.origin && u.pathname !== location.pathname) {
+        history.back(); return false;
+      }
+    } catch (_) { }
+    return true;
+  }
+</script>
+@endpush
+@include('pwa.vendor.shop.mobile-dashboard')
+@endsection

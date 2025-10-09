@@ -1,0 +1,52 @@
+@extends('pwa.layouts.app')
+
+@section('title', 'Martplace – Get Started')
+@section('body_class', 'preload signup-page')
+
+@section('content')
+@php
+    $user = auth()->user();
+    $actionRoute = $user->role === 'vendor'
+        ? route('vendor.onboarding.step1')
+        : route('client.home'); //
+@endphp
+
+<section class="signup_area section--padding2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <form method="GET" action="{{ $actionRoute }}">
+          <div class="cardify signup_form">
+            <div class="login--header text-center">
+              <h3>Welcome to</h3>
+            </div>
+            <div class="text-center mb-4">
+              <img
+                src="{{ asset('images/logobadcrop.png') }}"
+                alt="Marketplace Logo"
+                class="login_logo"
+                style="width:40%; height:auto; display:block; margin:0 auto;"
+              />
+            </div>
+            <div class="login--form" style="text-align:center;">
+              <div class="marketing-copy">
+                <p>Better Bites, Pay Less</p>
+                <p>Find local deals on food &amp; groceries</p>
+                <p>Shop by category or location</p>
+                <p>Get instant alerts on nearby offers</p>
+                <p>Reserve or buy in seconds</p>
+                <p>Track your savings &amp; reduce waste</p>
+              </div>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn--md btn--round register_btn glass-button-send-code">
+                  Let’s get started
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+@endsection
