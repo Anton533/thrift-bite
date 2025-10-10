@@ -333,15 +333,15 @@
       width: 100%;
       background-color: #FBE7BF;
       border-radius: 12px;
-      overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       color: #1D3F21;
       margin: 0 auto;
     }
 
     .meal-card__content {
-      padding: 14px;
+      position: relative;
       text-align: left;
+      padding: 14px;
     }
 
     .meal-card__title {
@@ -358,16 +358,18 @@
     }
 
     .meal-card__like {
-      width: 20px;
-      height: 20px;
-      background: url('heart-outline.svg') center/contain no-repeat;
-      border: none;
-      background-color: transparent;
+      position: absolute;
+      top: -16px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      background: url('red-heart.svg') center/contain no-repeat;
       cursor: pointer;
+      z-index: 1;
     }
 
     .meal-card__like.active {
-      background-image: url('heart-filled.svg');
+      background-image: url('red-heart-2.svg');
     }
 
     .meal-card__distance {
@@ -399,13 +401,115 @@
       padding: 10px 0;
       color: #1d2b2a;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 18px;
+      line-height: 1;
       cursor: pointer;
       transition: background-color 0.2s;
     }
 
     .meal-card__button:hover {
       background-color: #fdae2c;
+    }
+
+    /* ---WELCOME CARD --- */
+    .welcome-card {
+      position: relative;
+      font-family: Quicksand, system-ui, sans-serif;
+      box-sizing: border-box;
+
+      background-color: #fff;
+      color: #18533C;
+      width: 520px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      line-height: 1.2;
+      margin-block: 20px;
+      margin-inline: auto;
+      padding: 15px;
+    }
+
+    .welcome-card__content {
+      background-image: url('/veggies-bg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      text-align: center;
+      padding: 30px 20px 80px;
+    }
+
+    .welcome-card__greeting {
+      font-size: 36px;
+      font-weight: 600;
+      color: #184f42;
+
+      margin-block: 0 16px;
+    }
+
+    .welcome-card__logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-block-end: 10px;
+    }
+
+    .welcome-card__logo-img {
+      width: 130px;
+      height: 130px;
+    }
+
+    .welcome-card__title {
+      font-size: 58px;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .welcome-card__subtitle {
+      font-size: 24px;
+      font-weight: 600;
+
+      margin-block: 0 20px;
+    }
+
+    .welcome-card__list {
+      list-style: none;
+
+      padding-inline-start: 50px;
+      margin-block: 0 60px;
+      margin-inline: auto;
+    }
+
+    .welcome-card__item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 10px 0;
+    }
+
+    .welcome-card__item-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .welcome-card__button {
+      width: 100%;
+      max-width: 360px;
+      background-color: #BE8818;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      padding: 20px;
+    }
+
+    .welcome-card__button:hover {
+      background-color: #c57b15;
     }
   </style>
 
@@ -529,6 +633,7 @@
 
       <div class="meal-card">
         <div class="meal-card__content">
+          <div class="meal-card__like" id="likeBtn" onclick="this.classList.toggle('active');"></div>
           <h3 class="meal-card__title">Roast Chicken Meal</h3>
           <p class="meal-card__subtitle">Pick up today 9:20 PM - 9:50 PM • 5.6 mi
           </p>
@@ -543,6 +648,63 @@
         </div>
       </div>
     </article>
+
+    <section class="welcome-card">
+      <div class="welcome-card__content">
+        <h2 class="welcome-card__greeting">Welcome to</h2>
+
+        <div class="welcome-card__logo">
+          <img src="thriftbite-logo.png" alt="ThriftBite logo" class="welcome-card__logo-img" />
+          <h1 class="welcome-card__title">ThriftBite</h1>
+        </div>
+
+        <p class="welcome-card__subtitle">
+          Smart Savings. Delicious Choices.
+        </p>
+
+        <ul class="welcome-card__list">
+          <li class="welcome-card__item">
+            <svg class="welcome-card__item-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="lucide lucide-disc2-icon lucide-disc-2">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 12h.01" />
+            </svg>
+            Find local deals on food & groceries
+          </li>
+          <li class="welcome-card__item">
+            <svg class="welcome-card__item-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="lucide lucide-circle-icon lucide-circle">
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            Shop by category or location
+          </li>
+          <li class="welcome-card__item">
+            <svg class="welcome-card__item-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big">
+              <path d="M21.801 10A10 10 0 1 1 17 3.335" />
+              <path d="m9 11 3 3L22 4" />
+            </svg>
+            Get instant alerts on nearby offers
+          </li>
+          <li class="welcome-card__item">
+            <svg class="welcome-card__item-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="lucide lucide-circle-equal-icon lucide-circle-equal">
+              <path d="M7 10h10" />
+              <path d="M7 14h10" />
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            Reserve or buy in seconds
+          </li>
+        </ul>
+
+        <button class="welcome-card__button">Sign in to Save Big</button>
+      </div>
+    </section>
   </div>
 </body>
 
