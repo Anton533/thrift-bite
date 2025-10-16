@@ -434,15 +434,33 @@
       background-position: center;
       background-size: cover;
       text-align: center;
-      padding: 30px 20px 80px;
+      padding: 20px 10px 40px;
+    }
+
+    @media only screen and (min-width: 768px) {
+      .welcome-card__content {
+        padding: 30px 20px 80px;
+      }
     }
 
     .welcome-card__greeting {
-      font-size: 36px;
+      font-size: 28px;
       font-weight: 600;
       color: #184f42;
 
       margin-block: 0 16px;
+    }
+
+    @media only screen and (min-width: 576px) {
+      .welcome-card__greeting {
+        font-size: 32px;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      .welcome-card__greeting {
+        font-size: 36px;
+      }
     }
 
     .welcome-card__logo {
@@ -454,38 +472,116 @@
     }
 
     .welcome-card__logo-img {
-      width: 130px;
-      height: 130px;
+      width: 100px;
+      height: 100px;
+    }
+
+    @media only screen and (min-width: 768px) {
+      .welcome-card__logo-img {
+        width: 130px;
+        height: 130px;
+      }
     }
 
     .welcome-card__title {
-      font-size: 58px;
+      font-size: 42px;
       font-weight: 800;
       margin: 0;
     }
 
+    @media only screen and (min-width: 576px) {
+      .welcome-card__title {
+        font-size: 48px;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      .welcome-card__title {
+        font-size: 58px;
+      }
+    }
+
     .welcome-card__subtitle {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 600;
 
       margin-block: 0 20px;
     }
 
+    @media only screen and (min-width: 500px) {
+      .welcome-card__subtitle {
+        font-size: 20px;
+      }
+    }
+
+    @media only screen and (min-width: 576px) {
+      .welcome-card__subtitle {
+        font-size: 24px;
+      }
+    }
+
     .welcome-card__list {
       list-style: none;
+      padding-inline-start: 0;
+      margin-block: 0 30px;
+    }
 
-      padding-inline-start: 50px;
-      margin-block: 0 60px;
-      margin-inline: auto;
+    @media only screen and (min-width: 400px) {
+      .welcome-card__list {
+        padding-inline-start: 30px;
+        margin-block: 0 40px;
+      }
+    }
+
+    @media only screen and (min-width: 450px) {
+      .welcome-card__list {
+        padding-inline-start: 40px;
+      }
+    }
+
+    @media only screen and (min-width: 500px) {
+      .welcome-card__list {
+        padding-inline-start: 60px;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      .welcome-card__list {
+        margin-block: 0 60px;
+        padding-inline-start: 50px;
+      }
     }
 
     .welcome-card__item {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 18px;
+      align-items: start;
+      gap: 5px;
+      text-align: left;
+      font-size: 14px;
       font-weight: 600;
       margin: 10px 0;
+    }
+
+    @media only screen and (min-width: 390px) {
+      .welcome-card__item {
+        align-items: center;
+        gap: 6px;
+      }
+    }
+
+    @media only screen and (min-width: 576px) {
+      .welcome-card__item {
+        font-size: 17px;
+        gap: 8px;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      .welcome-card__item {
+        align-items: center;
+        font-size: 18px;
+        gap: 10px;
+      }
     }
 
     .welcome-card__item-icon {
@@ -500,12 +596,19 @@
       color: #fff;
       border: none;
       border-radius: 25px;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 400;
       letter-spacing: .04em;
       cursor: pointer;
       transition: background-color 0.2s;
-      padding: 20px;
+      padding: 15px;
+    }
+
+    @media only screen and (min-width: 768px) {
+      .welcome-card__button {
+        font-size: 24px;
+        padding: 20px;
+      }
     }
 
     .welcome-card__button:hover {
@@ -651,7 +754,7 @@
 
     <section class="welcome-card">
       <div class="welcome-card__content">
-        <h2 class="welcome-card__greeting">Welcome to</h2>
+        <h2 class="welcome-card__greeting">Welcome to lorem</h2>
 
         <div class="welcome-card__logo">
           <img src="thriftbite-logo.png" alt="ThriftBite logo" class="welcome-card__logo-img" />
